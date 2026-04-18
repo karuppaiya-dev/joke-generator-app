@@ -134,4 +134,4 @@ https://jokeapi.dev
 
 ## Author
 
-Built by Your Name
+Karuppaiya murugan
