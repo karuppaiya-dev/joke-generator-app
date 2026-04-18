@@ -1,0 +1,123 @@
+<!-- include header -->
+<%- include("partials/header") %>
+
+<div class="container py-4">
+  <div class="row g-4">
+
+    <!-- LEFT: FORM -->
+    <div class="col-12 col-lg-6">
+      <div class="p-4 rounded bg-dark text-white border h-100">
+
+        <form action="/joke" method="post">
+
+          <% const cats=[].concat(formData?.categories || []); %>
+          <% const flags=[].concat(formData?.blacklist || []); %>
+          <% const types=[].concat(formData?.jokeType || []); %>
+
+          <!-- Category -->
+          <div class="mb-3">
+            <label class="form-label">Select category / categories:</label>
+            <div class="border p-3 rounded">
+
+              <div class="form-check form-check-inline">
+                <input id="anyRadio" class="form-check-input" type="radio" name="categoryType" value="Any"
+                  <%= formData?.categoryType==="Any" || !formData ? "checked" : "" %>>
+                <label class="form-check-label">Any</label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input id="customRadio" class="form-check-input" type="radio" name="categoryType" value="Custom"
+                  <%= formData?.categoryType==="Custom" ? "checked" : "" %>>
+                <label class="form-check-label">Custom:</label>
+              </div>
+
+              <div class="mt-2" id="customCategories" style="display: none;">
+
+                <input type="checkbox" name="categories" value="Programming" <%= cats.includes("Programming") ? "checked" : "" %>> Programming
+                <input type="checkbox" name="categories" value="Misc" <%= cats.includes("Misc") ? "checked" : "" %>> Misc
+                <input type="checkbox" name="categories" value="Dark" <%= cats.includes("Dark") ? "checked" : "" %>> Dark
+                <input type="checkbox" name="categories" value="Pun" <%= cats.includes("Pun") ? "checked" : "" %>> Pun
+                <input type="checkbox" name="categories" value="Spooky" <%= cats.includes("Spooky") ? "checked" : "" %>> Spooky
+                <input type="checkbox" name="categories" value="Christmas" <%= cats.includes("Christmas") ? "checked" : "" %>> Christmas
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Language -->
+          <div class="mb-3">
+            <label class="form-label">Select language:</label>
+            <select class="form-select" name="lang">
+              <option value="en" <%= formData?.lang==="en" ? "selected" : "" %>>en - English</option>
+              <option value="cs" <%= formData?.lang==="cs" ? "selected" : "" %>>cs - Czech</option>
+              <option value="de" <%= formData?.lang==="de" ? "selected" : "" %>>de - German</option>
+              <option value="es" <%= formData?.lang==="es" ? "selected" : "" %>>es - Spanish</option>
+              <option value="fr" <%= formData?.lang==="fr" ? "selected" : "" %>>fr - French</option>
+              <option value="pt" <%= formData?.lang==="pt" ? "selected" : "" %>>pt - Portuguese</option>
+            </select>
+          </div>
+
+          <!-- Blacklist -->
+          <div class="mb-3">
+            <label class="form-label">Select flags to blacklist:</label>
+            <div class="border p-3 rounded">
+
+              <input type="checkbox" name="blacklist" value="nsfw" <%= flags.includes("nsfw") ? "checked" : "" %>> nsfw
+              <input type="checkbox" name="blacklist" value="religious" <%= flags.includes("religious") ? "checked" : "" %>> religious
+              <input type="checkbox" name="blacklist" value="political" <%= flags.includes("political") ? "checked" : "" %>> political
+              <input type="checkbox" name="blacklist" value="racist" <%= flags.includes("racist") ? "checked" : "" %>> racist
+              <input type="checkbox" name="blacklist" value="sexist" <%= flags.includes("sexist") ? "checked" : "" %>> 18+
+              <input type="checkbox" name="blacklist" value="explicit" <%= flags.includes("explicit") ? "checked" : "" %>> explicit
+
+            </div>
+          </div>
+
+          <!-- Joke type -->
+          <div class="mb-3">
+            <label class="form-label">Select at least one joke type:</label>
+            <div class="border p-3 rounded">
+
+              <input type="checkbox" name="jokeType" value="single" checked> single
+              <input type="checkbox" name="jokeType" value="twopart"
+                <%= types.includes("twopart") || !formData ? "checked" : "" %>> twopart
+
+            </div>
+          </div>
+
+          <!-- Amount -->
+          <div class="mb-3">
+            <label class="form-label">Amount of jokes:</label>
+            <select class="form-select" name="amount">
+              <% for(let i=1; i <=5; i++) { %>
+                <option value="<%= i %>" <%= formData?.amount==i ? "selected" : "" %>><%= i %></option>
+              <% } %>
+            </select>
+          </div>
+
+          <button class="btn btn-primary w-100">Get Joke</button>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- RIGHT: JOKE -->
+    <div class="col-12 col-lg-6">
+      <div class="card h-100">
+
+        <div class="card-header bg-black text-white">
+          JOKE
+        </div>
+
+        <div class="card-body d-flex ">
+          <p class="card-text">
+            <%- joke || "Click 'Tell Joke' to load" %>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<%- include("partials/footer") %>

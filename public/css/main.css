@@ -1,0 +1,45 @@
+:root {
+  /* Background */
+  --bg-main: #0f172a;        /* main background */
+  --bg-card: #1e293b;        /* card */
+  --bg-soft: #334155;        /* soft sections */
+
+  /* Text */
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* Brand */
+  --primary: #6366f1;        /* indigo */
+  --primary-light: #312e81;
+
+  /* Accent */
+  --accent: #22d3ee;         /* cyan */
+
+  /* Borders */
+  --border: #334155;
+
+  /* Shadow (subtle for dark) */
+  --shadow-sm: 0 2px 6px rgba(0,0,0,0.4);
+  --shadow-md: 0 10px 25px rgba(0,0,0,0.5);
+
+  /* Radius */
+  --radius: 12px;
+}
+
+body {
+    background-color: var(--text-primary);
+    color: white;
+}
+
+.dashboard-card {
+    background-color: #1e293b;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transition: 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: scale(1.03);
+}
